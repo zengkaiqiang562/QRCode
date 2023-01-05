@@ -95,7 +95,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
     private CameraManager cameraManager;
     private CaptureActivityHandler handler;
     private Result savedResultToShow;
-    private ViewfinderView viewfinderView;
+    private ViewfinderView viewfinderView; // 扫描框
     private TextView statusView;
     private View resultView;
     private Result lastResult;
@@ -340,70 +340,26 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         ResultHandler resultHandler = ResultHandlerFactory.makeResultHandler(this, rawResult);
 
         boolean fromLiveScan = barcode != null;
-        if (fromLiveScan) {
+        if (fromLiveScan) { // 摄像头扫码，添加到历史记录，并播放完成声音和震动效果
             historyManager.addHistoryItem(rawResult, resultHandler);
             // Then not from history, so beep/vibrate and we have an image to draw on
             beepManager.playBeepSoundAndVibrate();
-            drawResultPoints(barcode, scaleFactor, rawResult);
         }
 
         switch (source) {
             case NONE:
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                if (fromLiveScan && prefs.getBoolean(PreferencesActivity.KEY_BULK_MODE, false)) {
+                if (fromLiveScan && prefs.getBoolean(PreferencesActivity.KEY_BULK_MODE, false)) { // 批量扫描时，不显示扫描结果
                     Toast.makeText(getApplicationContext(),
                             getResources().getString(R.string.msg_bulk_mode_scanned) + " (" + rawResult.getText() + ')',
                             Toast.LENGTH_SHORT).show();
                     maybeSetClipboard(resultHandler);
                     // Wait a moment or else it will scan the same barcode continuously about 3 times
                     restartPreviewAfterDelay(BULK_MODE_SCAN_DELAY_MS);
-                } else {
+                } else { // 显示扫描结果
                     handleDecodeInternally(rawResult, resultHandler, barcode);
                 }
                 break;
-        }
-    }
-
-    /**
-     * Superimpose a line for 1D or dots for 2D to highlight the key features of the barcode.
-     *
-     * @param barcode     A bitmap of the captured image.
-     * @param scaleFactor amount by which thumbnail was scaled
-     * @param rawResult   The decoded results which contains the points to draw.
-     */
-    private void drawResultPoints(Bitmap barcode, float scaleFactor, Result rawResult) {
-        ResultPoint[] points = rawResult.getResultPoints();
-        if (points != null && points.length > 0) {
-            Canvas canvas = new Canvas(barcode);
-            Paint paint = new Paint();
-            paint.setColor(getResources().getColor(R.color.result_points));
-            if (points.length == 2) {
-                paint.setStrokeWidth(4.0f);
-                drawLine(canvas, paint, points[0], points[1], scaleFactor);
-            } else if (points.length == 4 &&
-                    (rawResult.getBarcodeFormat() == BarcodeFormat.UPC_A ||
-                            rawResult.getBarcodeFormat() == BarcodeFormat.EAN_13)) {
-                // Hacky special case -- draw two lines, for the barcode and metadata
-                drawLine(canvas, paint, points[0], points[1], scaleFactor);
-                drawLine(canvas, paint, points[2], points[3], scaleFactor);
-            } else {
-                paint.setStrokeWidth(10.0f);
-                for (ResultPoint point : points) {
-                    if (point != null) {
-                        canvas.drawPoint(scaleFactor * point.getX(), scaleFactor * point.getY(), paint);
-                    }
-                }
-            }
-        }
-    }
-
-    private static void drawLine(Canvas canvas, Paint paint, ResultPoint a, ResultPoint b, float scaleFactor) {
-        if (a != null && b != null) {
-            canvas.drawLine(scaleFactor * a.getX(),
-                    scaleFactor * a.getY(),
-                    scaleFactor * b.getX(),
-                    scaleFactor * b.getY(),
-                    paint);
         }
     }
 
@@ -414,7 +370,7 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        if (resultHandler.getDefaultButtonID() != null && prefs.getBoolean(PreferencesActivity.KEY_AUTO_OPEN_WEB, false)) {
+        if (resultHandler.getDefaultButtonID() != null && prefs.getBoolean(PreferencesActivity.KEY_AUTO_OPEN_WEB, false)) { // 自动打开扫描到的网址
             resultHandler.handleButtonPress(resultHandler.getDefaultButtonID());
             return;
         }
@@ -424,10 +380,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         resultView.setVisibility(View.VISIBLE);
 
         ImageView barcodeImageView = (ImageView) findViewById(R.id.barcode_image_view);
-        if (barcode == null) {
+        if (barcode == null) { // 来自历史记录
             barcodeImageView.setImageBitmap(BitmapFactory.decodeResource(getResources(),
                     R.drawable.launcher_icon));
-        } else {
+        } else { // 来自摄像机扫码
             barcodeImageView.setImageBitmap(barcode);
         }
 
