@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "545454545454",
+    "project_id": "abab-ababa",
+    "storage_bucket": "abab-ababa.dfdfdfd.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:545454545454:android:ererererererererererer",
+        "android_client_info": {
+          "package_name": "com.cozs.qrcode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "545454545454-asasasasasasasasasasasasasasasas.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "nbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbn"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "545454545454-asasasasasasasasasasasasasasasas.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

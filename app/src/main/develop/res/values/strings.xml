@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">QRCode</string>
+
+    <!--启动页-->
+    <string name="smart_clean_master">Super Smart Cleaner</string>
+
+    <!--引导页-->
+    <string name="clean_unuse_photo">Clean up useless pictures</string>
+    <string name="onekey_clean_blur_dupli">Clear blurry duplicate pictures with one click</string>
+    <string name="next_step">Next</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="smart_photo_clean">Smart picture clean</string>
+    <string name="clean_simil_large">Clear similar and oversized pictures</string>
+</resources>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="OnClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <FrameLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_privacy"
+            android:layout_marginBottom="62dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/root_guide_2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv_guide_2"
+                    android:layout_width="315dp"
+                    android:layout_height="324dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_guide_2_next"
+                    app:layout_constraintVertical_bias="0.354"
+                    android:src="@drawable/img_guide_2"/>
+
+                <TextView
+                    android:id="@+id/tv_smart_photo_clean"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_guide_2"
+                    app:layout_constraintBottom_toTopOf="@id/tv_clean_simil_large"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintVertical_bias="0.545"
+                    android:text="@string/smart_photo_clean"
+                    android:textSize="20sp"
+                    android:textColor="#FF1A1A1A"/>
+
+                <TextView
+                    android:id="@+id/tv_clean_simil_large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_smart_photo_clean"
+                    app:layout_constraintBottom_toTopOf="@id/tv_guide_2_next"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/clean_simil_large"
+                    android:textSize="16sp"
+                    android:textColor="#FF666666"/>
+
+                <TextView
+                    android:id="@+id/tv_guide_2_next"
+                    android:layout_width="315dp"
+                    android:layout_height="46dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/bg_button_4dp"
+                    android:gravity="center"
+                    android:text="@string/next_step"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:onClick="@{OnClickListener::onClick}"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/root_guide_1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_guide_1"
+                    android:layout_width="315dp"
+                    android:layout_height="324dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_guide_1_next"
+                    app:layout_constraintVertical_bias="0.354"
+                    android:src="@drawable/img_guide_1"/>
+
+                <TextView
+                    android:id="@+id/tv_unuse_photo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_guide_1"
+                    app:layout_constraintBottom_toTopOf="@id/tv_clean_blur_dupli"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    app:layout_constraintVertical_bias="0.545"
+                    android:text="@string/clean_unuse_photo"
+                    android:textSize="20sp"
+                    android:textColor="#FF1A1A1A"/>
+
+                <TextView
+                    android:id="@+id/tv_clean_blur_dupli"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_unuse_photo"
+                    app:layout_constraintBottom_toTopOf="@id/tv_guide_1_next"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/onekey_clean_blur_dupli"
+                    android:textSize="16sp"
+                    android:textColor="#FF666666"/>
+
+                <TextView
+                    android:id="@+id/tv_guide_1_next"
+                    android:layout_width="315dp"
+                    android:layout_height="46dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:background="@drawable/bg_button_4dp"
+                    android:gravity="center"
+                    android:text="@string/next_step"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:onClick="@{OnClickListener::onClick}"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </FrameLayout>
+        
+        <TextView
+            android:id="@+id/tv_privacy"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tv_point"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:layout_marginBottom="14dp"
+            android:gravity="center_vertical"
+            android:text="@string/privacy_policy"
+            android:textSize="10sp"
+            android:textColor="#FF3C96FF"
+            android:onClick="@{OnClickListener::onClick}"/>
+
+        <TextView
+            android:id="@+id/tv_point"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            app:layout_constraintStart_toEndOf="@id/tv_privacy"
+            app:layout_constraintEnd_toStartOf="@id/tv_service"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="14dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:gravity="center_vertical"
+            android:text="·"
+            android:textSize="10sp"
+            android:textColor="#FF3C96FF"/>
+
+        <TextView
+            android:id="@+id/tv_service"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_point"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="14dp"
+            android:gravity="center_vertical"
+            android:text="@string/terms_of_service"
+            android:textSize="10sp"
+            android:textColor="#FF3C96FF"
+            android:onClick="@{OnClickListener::onClick}"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

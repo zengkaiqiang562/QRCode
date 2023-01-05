@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ActivityAnimationStyle" mce_bogus="1" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/right_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/left_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/left_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/right_out</item>
+
+        <item name="android:taskOpenEnterAnimation">@anim/right_in</item>
+        <item name="android:taskOpenExitAnimation">@anim/left_out</item>
+        <item name="android:taskCloseEnterAnimation">@anim/left_in</item>
+        <item name="android:taskCloseExitAnimation">@anim/right_out</item>
+        <item name="android:taskToFrontEnterAnimation">@anim/right_in</item>
+        <item name="android:taskToFrontExitAnimation">@anim/left_out</item>
+        <item name="android:taskToBackEnterAnimation">@anim/left_in</item>
+        <item name="android:taskToBackExitAnimation">@anim/right_out</item>
+    </style>
+
+    <style name="SplashActivityStyle" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:windowBackground">@drawable/background_transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="DialogAnimationStyle" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/bottom_in</item>
+        <item name="android:windowExitAnimation">@anim/bottom_out</item>
+    </style>
+
+    <style name="DialogBackgroundStyle" parent="AlertDialog.AppCompat">
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 是否浮现在activity之上 -->
+        <!--如果设置为true，那么使用框架ImmersionBar无法使DialogFragment在虚拟导航栏之上，会重叠-->
+        <item name="android:windowIsFloating">false</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">true</item>
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--显示区域以外是否使用黑色半透明背景-->
+        <!-- 模糊 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:backgroundDimAmount">0.5</item>
+    </style>
+</resources>
