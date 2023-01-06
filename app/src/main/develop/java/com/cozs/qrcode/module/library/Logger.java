@@ -5,7 +5,7 @@ import android.util.Log;
 import com.cozs.qrcode.BuildConfig;
 
 public class Logger {
-    private static final boolean DEBUG = BuildConfig.LOG_ENABLE;
+    public static final boolean DEBUG = BuildConfig.LOG_ENABLE;
 
     public static void d(String tag, String message) {
         if (DEBUG) {

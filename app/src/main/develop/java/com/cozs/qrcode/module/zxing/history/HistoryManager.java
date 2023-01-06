@@ -14,13 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.zxing.client.android.history;
-
-import com.google.zxing.BarcodeFormat;
-import com.google.zxing.Result;
-import com.google.zxing.client.android.Intents;
-import com.google.zxing.client.android.PreferencesActivity;
-import com.google.zxing.client.android.result.ResultHandler;
+package com.cozs.qrcode.module.zxing.history;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -34,6 +28,12 @@ import android.net.Uri;
 import android.os.Environment;
 import android.preference.PreferenceManager;
 import android.util.Log;
+
+import com.cozs.qrcode.module.zxing.Intents;
+import com.cozs.qrcode.module.zxing.Preferences;
+import com.cozs.qrcode.module.zxing.result.ResultHandler;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -76,7 +76,7 @@ public final class HistoryManager {
     public HistoryManager(Activity activity) {
         this.activity = activity;
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        enableHistory = prefs.getBoolean(PreferencesActivity.KEY_ENABLE_HISTORY, true);
+        enableHistory = prefs.getBoolean(Preferences.KEY_ENABLE_HISTORY, true);
     }
 
     public boolean hasHistoryItems() {
@@ -155,7 +155,7 @@ public final class HistoryManager {
         }
 
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
-        if (!prefs.getBoolean(PreferencesActivity.KEY_REMEMBER_DUPLICATES, false)) {
+        if (!prefs.getBoolean(Preferences.KEY_REMEMBER_DUPLICATES, false)) {
             deletePrevious(result.getText());
         }
 

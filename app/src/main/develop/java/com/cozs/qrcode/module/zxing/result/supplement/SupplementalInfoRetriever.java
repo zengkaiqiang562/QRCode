@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.zxing.client.android.result.supplement;
+package com.cozs.qrcode.module.zxing.result.supplement;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -26,17 +26,17 @@ import android.text.style.URLSpan;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.cozs.qrcode.module.zxing.history.HistoryManager;
+import com.google.zxing.client.result.ISBNParsedResult;
+import com.google.zxing.client.result.ParsedResult;
+import com.google.zxing.client.result.ProductParsedResult;
+import com.google.zxing.client.result.URIParsedResult;
+
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.concurrent.RejectedExecutionException;
-
-import com.google.zxing.client.android.history.HistoryManager;
-import com.google.zxing.client.result.ISBNParsedResult;
-import com.google.zxing.client.result.ParsedResult;
-import com.google.zxing.client.result.ProductParsedResult;
-import com.google.zxing.client.result.URIParsedResult;
 
 /**
  * Superclass of implementations which can asynchronously retrieve more information

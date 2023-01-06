@@ -100,7 +100,8 @@ android {
 dependencies {
     testImplementation("junit:junit:4.13.2")
 
-    implementation(project(":zxing"))
+//    implementation(project(":zxing"))
+    implementation("com.google.zxing:core:3.3.3")
 
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("com.google.android.material:material:1.6.1")
