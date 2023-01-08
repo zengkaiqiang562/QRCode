@@ -32,8 +32,33 @@ import com.cozs.qrcode.module.callback.PermissionCallback;
 import com.cozs.qrcode.module.library.Logger;
 import com.cozs.qrcode.module.zxing.camera.CameraManager;
 import com.cozs.qrcode.module.zxing.camera.FrontLightMode;
+import com.cozs.qrcode.module.zxing.result.AddressBookResultHandler;
+import com.cozs.qrcode.module.zxing.result.CalendarResultHandler;
+import com.cozs.qrcode.module.zxing.result.EmailAddressResultHandler;
+import com.cozs.qrcode.module.zxing.result.GeoResultHandler;
+import com.cozs.qrcode.module.zxing.result.ISBNResultHandler;
+import com.cozs.qrcode.module.zxing.result.ProductResultHandler;
 import com.cozs.qrcode.module.zxing.result.ResultHandler;
+import com.cozs.qrcode.module.zxing.result.SMSResultHandler;
+import com.cozs.qrcode.module.zxing.result.TelResultHandler;
+import com.cozs.qrcode.module.zxing.result.TextResultHandler;
+import com.cozs.qrcode.module.zxing.result.URIResultHandler;
+import com.cozs.qrcode.module.zxing.result.WifiResultHandler;
 import com.google.zxing.Result;
+import com.google.zxing.client.result.AddressBookParsedResult;
+import com.google.zxing.client.result.CalendarParsedResult;
+import com.google.zxing.client.result.EmailAddressParsedResult;
+import com.google.zxing.client.result.ExpandedProductParsedResult;
+import com.google.zxing.client.result.GeoParsedResult;
+import com.google.zxing.client.result.ISBNParsedResult;
+import com.google.zxing.client.result.ParsedResult;
+import com.google.zxing.client.result.ParsedResultType;
+import com.google.zxing.client.result.ProductParsedResult;
+import com.google.zxing.client.result.SMSParsedResult;
+import com.google.zxing.client.result.TelParsedResult;
+import com.google.zxing.client.result.TextParsedResult;
+import com.google.zxing.client.result.URIParsedResult;
+import com.google.zxing.client.result.WifiParsedResult;
 import com.hjq.permissions.OnPermissionCallback;
 import com.hjq.permissions.Permission;
 import com.hjq.permissions.XXPermissions;
@@ -99,7 +124,7 @@ public class CaptureFragment extends Fragment {
         mCaptureHelper.setOnCaptureCallback(new OnCaptureCallback() {
             @Override
             public void onResultCallback(Result result, ResultHandler resultHandler) {
-
+                handResult(result, resultHandler);
             }
         });
 
@@ -261,5 +286,64 @@ public class CaptureFragment extends Fragment {
         applyCameraPermission(granted -> {
             callback.onCompleted(granted);
         });
+    }
+
+    private void handResult(@NonNull Result result, @NonNull ResultHandler resultHandler) {
+        ParsedResult parsedResult = resultHandler.getResult();
+        ParsedResultType parsedResultType = resultHandler.getType();
+        switch (parsedResultType) {
+            case ADDRESSBOOK:
+                AddressBookResultHandler addressBookResultHandler = (AddressBookResultHandler) resultHandler;
+                AddressBookParsedResult addressResult = (AddressBookParsedResult) parsedResult;
+                break;
+            case EMAIL_ADDRESS:
+                EmailAddressResultHandler emailAddressResultHandler = (EmailAddressResultHandler) resultHandler;
+                EmailAddressParsedResult emailResult = (EmailAddressParsedResult) parsedResult;
+                break;
+            case PRODUCT:
+                ProductResultHandler productResultHandler = (ProductResultHandler) resultHandler;
+                if (parsedResult instanceof ProductParsedResult) {
+                    ProductParsedResult productParsedResult = (ProductParsedResult) parsedResult;
+                }
+                if (parsedResult instanceof ExpandedProductParsedResult) {
+                    ExpandedProductParsedResult expandedProductParsedResult = (ExpandedProductParsedResult) parsedResult;
+                }
+                break;
+            case URI:
+                URIResultHandler uriResultHandler = (URIResultHandler) resultHandler;
+                URIParsedResult uriParsedResult = (URIParsedResult) parsedResult;
+                break;
+            case WIFI:
+                WifiResultHandler wifiResultHandler = (WifiResultHandler) resultHandler;
+                WifiParsedResult wifiParsedResult = (WifiParsedResult) parsedResult;
+                break;
+            case GEO:
+                /**
+                 * 调用 {@link ResultHandler#getDirections(double, double)} 显示一个地图，参考 {@link GeoResultHandler#handleButtonPress(int)}
+                 */
+                GeoResultHandler geoResultHandler = (GeoResultHandler) resultHandler;
+                GeoParsedResult geoParsedResult = (GeoParsedResult) parsedResult;
+                break;
+            case TEL:
+                TelResultHandler telResultHandler = (TelResultHandler) resultHandler;
+                TelParsedResult telParsedResult = (TelParsedResult) parsedResult;
+                break;
+            case SMS:
+                SMSResultHandler smsResultHandler = (SMSResultHandler) resultHandler;
+                SMSParsedResult smsParsedResult = (SMSParsedResult) parsedResult;
+                break;
+            case CALENDAR:
+                CalendarResultHandler calendarResultHandler = (CalendarResultHandler) resultHandler;
+                CalendarParsedResult calendarParsedResult = (CalendarParsedResult) parsedResult;
+                break;
+            case ISBN:
+                ISBNResultHandler isbnResultHandler = (ISBNResultHandler) resultHandler;
+                ISBNParsedResult isbnParsedResult = (ISBNParsedResult) parsedResult;
+                break;
+            default:
+                TextResultHandler textResultHandler = (TextResultHandler) resultHandler;
+                TextParsedResult textParsedResult = (TextParsedResult) parsedResult;
+                break;
+        }
     }
 }
