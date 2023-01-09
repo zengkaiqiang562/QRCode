@@ -1,5 +1,7 @@
 package com.cozs.qrcode.module.zxing.ext.bean;
 
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 
 import com.google.zxing.BarcodeFormat;
@@ -50,6 +52,9 @@ public class AddressBookResultBean implements IResultBean {
     }
 
     public String formatText() {
+        if (!TextUtils.isEmpty(rawText)) {
+            return rawText;
+        }
         return getMeCard(name, company, null, tel, null, email, address, null, notes);
     }
 

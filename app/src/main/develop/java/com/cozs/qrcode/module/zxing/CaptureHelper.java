@@ -519,6 +519,7 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
 
         Logger.e(TAG, "--> onResult  result.getText()=" + text);
         Logger.e(TAG, "--> onResult  result.getBarcodeFormat()=" + result.getBarcodeFormat());
+        Logger.e(TAG, "--> onResult  resultHandler.getType()=" + resultHandler.getType());
         Logger.e(TAG, "--> onResult  resultHandler.getDisplayContents()=" + resultHandler.getDisplayContents());
 
         historyManager.addHistoryItem(result, resultHandler);
