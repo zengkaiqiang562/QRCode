@@ -114,7 +114,7 @@ public final class HistoryManager {
         return items;
     }
 
-    public HistoryItem buildHistoryItem(int number) {
+    public HistoryItem buildHistoryItem(int number) { // 根据历史记录列表中的索引 number 查询并返回历史记录item项
         SQLiteOpenHelper helper = new DBHelper(activity);
         try (SQLiteDatabase db = helper.getReadableDatabase();
              Cursor cursor = db.query(DBHelper.TABLE_NAME,

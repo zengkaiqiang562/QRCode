@@ -5,20 +5,15 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
 import com.google.zxing.client.result.ExpandedProductParsedResult;
+import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ParsedResultType;
 import com.google.zxing.client.result.ProductParsedResult;
 
 import java.util.Map;
 
-public class ProductExpandResultBean implements IResultBean {
-
-    private final String barcodeFormat;
-    private final String parsedResultType;
-    private final long createTime;
-    private final String rawText;
-    private final String displayContents;
-    private boolean favorite;
+public class ProductExpandResultBean extends ResultBean {
 
     private String productID;
     private String sscc;
@@ -36,12 +31,8 @@ public class ProductExpandResultBean implements IResultBean {
     // For AIS that not exist in this object
     private Map<String,String> uncommonAIs;
 
-    public ProductExpandResultBean(String barcodeFormat, String parsedResultType, long createTime, String rawText, String displayContents) {
-        this.barcodeFormat = barcodeFormat;
-        this.parsedResultType = parsedResultType;
-        this.createTime = createTime;
-        this.rawText = rawText;
-        this.displayContents = displayContents;
+    public ProductExpandResultBean(Result result, ParsedResult parsedResult) {
+        super(result, parsedResult);
     }
 
     public void buildField(@NonNull ExpandedProductParsedResult parsedResult) {
@@ -66,36 +57,6 @@ public class ProductExpandResultBean implements IResultBean {
             return rawText;
         }
         return null;
-    }
-
-    @Override
-    public BarcodeFormat getBarcodeFormat() {
-        return BarcodeFormat.valueOf(barcodeFormat);
-    }
-
-    @Override
-    public ParsedResultType getParsedResultType() {
-        return ParsedResultType.valueOf(parsedResultType);
-    }
-
-    @Override
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    @Override
-    public String getRawText() {
-        return rawText;
-    }
-
-    @Override
-    public String getDisplayContents() {
-        return displayContents;
-    }
-
-    @Override
-    public boolean isFavorite() {
-        return favorite;
     }
 
     public String getProductID() {

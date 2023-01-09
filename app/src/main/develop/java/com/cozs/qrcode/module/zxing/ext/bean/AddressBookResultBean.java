@@ -5,17 +5,12 @@ import android.text.TextUtils;
 import androidx.annotation.NonNull;
 
 import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
 import com.google.zxing.client.result.AddressBookParsedResult;
+import com.google.zxing.client.result.ParsedResult;
 import com.google.zxing.client.result.ParsedResultType;
 
-public class AddressBookResultBean implements IResultBean {
-
-    private final String barcodeFormat;
-    private final String parsedResultType;
-    private final long createTime;
-    private final String rawText;
-    private final String displayContents;
-    private boolean favorite;
+public class AddressBookResultBean extends ResultBean {
 
     private String name;
     private String company;
@@ -27,12 +22,8 @@ public class AddressBookResultBean implements IResultBean {
 //    private final String address2;
     private String notes; // memo
 
-    public AddressBookResultBean(String barcodeFormat, String parsedResultType, long createTime, String rawText, String displayContents) {
-        this.barcodeFormat = barcodeFormat;
-        this.parsedResultType = parsedResultType;
-        this.createTime = createTime;
-        this.rawText = rawText;
-        this.displayContents = displayContents;
+    public AddressBookResultBean(Result result, ParsedResult parsedResult) {
+        super(result, parsedResult);
     }
 
     public void buildField(@NonNull AddressBookParsedResult parsedResult) {
@@ -56,36 +47,6 @@ public class AddressBookResultBean implements IResultBean {
             return rawText;
         }
         return getMeCard(name, company, null, tel, null, email, address, null, notes);
-    }
-
-    @Override
-    public BarcodeFormat getBarcodeFormat() {
-        return BarcodeFormat.valueOf(barcodeFormat);
-    }
-
-    @Override
-    public ParsedResultType getParsedResultType() {
-        return ParsedResultType.valueOf(parsedResultType);
-    }
-
-    @Override
-    public long getCreateTime() {
-        return createTime;
-    }
-
-    @Override
-    public String getRawText() {
-        return rawText;
-    }
-
-    @Override
-    public String getDisplayContents() {
-        return displayContents;
-    }
-
-    @Override
-    public boolean isFavorite() {
-        return favorite;
     }
 
     public String getName() {

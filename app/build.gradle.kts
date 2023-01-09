@@ -103,6 +103,9 @@ dependencies {
 //    implementation(project(":zxing"))
     implementation("com.google.zxing:core:3.3.3")
 
+    implementation("androidx.room:room-runtime:2.4.3")
+    annotationProcessor("androidx.room:room-compiler:2.4.3")
+
     implementation("androidx.appcompat:appcompat:1.4.2")
     implementation("com.google.android.material:material:1.6.1")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")

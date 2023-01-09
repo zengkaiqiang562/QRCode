@@ -24,6 +24,8 @@
 #-keep class com.cozs.qrcode.module.library.CryptoGuard { *; }
 -keep class com.cozs.qrcode.module.event.bean.** { *; }
 -keep class com.cozs.qrcode.module.bean.** { *; }
+-keep class com.cozs.qrcode.module.zxing.ext.bean.** { *; }
+-keep class com.cozs.qrcode.module.zxing.ext.history.HistoryEntity { *; }
 
 # lottie
 -keep class com.squareup.wire.** { *; }

@@ -71,7 +71,7 @@ public final class HistoryManager {
     private static final Pattern DOUBLE_QUOTE = Pattern.compile("\"", Pattern.LITERAL);
 
     private final Activity activity;
-    private final boolean enableHistory;
+    private final boolean enableHistory; // 开启历史记录功能
 
     public HistoryManager(Activity activity) {
         this.activity = activity;
@@ -79,7 +79,7 @@ public final class HistoryManager {
         enableHistory = prefs.getBoolean(Preferences.KEY_ENABLE_HISTORY, true);
     }
 
-    public boolean hasHistoryItems() {
+    public boolean hasHistoryItems() { // 是否存在历史记录
         SQLiteOpenHelper helper = new DBHelper(activity);
         try (SQLiteDatabase db = helper.getReadableDatabase();
              Cursor cursor = db.query(DBHelper.TABLE_NAME, COUNT_COLUMN, null, null, null, null, null)) {
@@ -91,7 +91,7 @@ public final class HistoryManager {
         }
     }
 
-    public List<HistoryItem> buildHistoryItems() {
+    public List<HistoryItem> buildHistoryItems() { // 历史记录列表数据
         SQLiteOpenHelper helper = new DBHelper(activity);
         List<HistoryItem> items = new ArrayList<>();
         try (SQLiteDatabase db = helper.getReadableDatabase();
@@ -223,7 +223,7 @@ public final class HistoryManager {
         }
     }
 
-    public void trimHistory() {
+    public void trimHistory() { // 最多只保存最近的2000个记录
         SQLiteOpenHelper helper = new DBHelper(activity);
         try (SQLiteDatabase db = helper.getWritableDatabase();
              Cursor cursor = db.query(DBHelper.TABLE_NAME,
