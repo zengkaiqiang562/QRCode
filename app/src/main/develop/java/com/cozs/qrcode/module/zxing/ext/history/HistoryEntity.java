@@ -1,5 +1,6 @@
 package com.cozs.qrcode.module.zxing.ext.history;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
@@ -21,7 +22,7 @@ public class HistoryEntity {
     public String parsedResultType;
     public long createTime;
     public String rawText;
-    public String displayContents;
+    public String display;
     public boolean favorite;
 
     @Ignore
@@ -36,14 +37,14 @@ public class HistoryEntity {
                          String parsedResultType,
                          long createTime,
                          String rawText,
-                         String displayContents,
+                         String display,
                          boolean favorite) {
         this.id = id;
         this.barcodeFormat = barcodeFormat;
         this.parsedResultType = parsedResultType;
         this.createTime = createTime;
         this.rawText = rawText;
-        this.displayContents = displayContents;
+        this.display = display;
         this.favorite = favorite;
     }
 
@@ -53,22 +54,32 @@ public class HistoryEntity {
                          String parsedResultType,
                          long createTime,
                          String rawText,
-                         String displayContents) {
+                         String display) {
         this.barcodeFormat = barcodeFormat;
-        this.parsedResultType = parsedResultType;
         this.createTime = createTime;
         this.rawText = rawText;
-        this.displayContents = displayContents;
+        this.parsedResultType = parsedResultType;
+        this.display = display;
+    }
+
+    // 扫描二维码使用
+    @Ignore
+    public HistoryEntity(@NonNull Result result, @NonNull ParsedResult pResult) {
+        this.barcodeFormat = result.getBarcodeFormat().name();
+        this.createTime = result.getTimestamp();
+        this.rawText = result.getText();
+        this.parsedResultType = pResult.getType().name();
+        this.display = pResult.getDisplayResult();
     }
 
     // 创建二维码使用
     @Ignore
-    public HistoryEntity(ResultBean resultBean) {
+    public HistoryEntity(ResultBean<?> resultBean) {
         this.barcodeFormat = resultBean.getBarcodeFormat().name();
         this.parsedResultType = resultBean.getParsedResultType().name();
         this.createTime = resultBean.getCreateTime();
         this.rawText = resultBean.getRawText();
-        this.displayContents = resultBean.getDisplay();
+        this.display = resultBean.getDisplay();
     }
 
     public Result getResult() {
@@ -85,7 +96,19 @@ public class HistoryEntity {
         return parsedResult;
     }
 
-    public <T extends ResultBean> T convert2ResultBean() {
-        return null;
+    public ResultBean<?> convert2ResultBean() {
+        return ResultBean.create(getResult(), getParsedResult());
+    }
+
+    @Override
+    public String toString() {
+        return "HistoryEntity{" +
+                "id=" + id +
+                ", barcodeFormat='" + barcodeFormat + '\'' +
+                ", parsedResultType='" + parsedResultType + '\'' +
+                ", createTime=" + createTime +
+                ", favorite=" + favorite +
+                ", rawText='" + rawText + '\'' +
+                '}';
     }
 }

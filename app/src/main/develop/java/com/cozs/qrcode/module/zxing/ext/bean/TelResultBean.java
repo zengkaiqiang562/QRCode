@@ -4,14 +4,11 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.google.zxing.client.result.ParsedResult;
-import com.google.zxing.client.result.ParsedResultType;
-import com.google.zxing.client.result.SMSParsedResult;
 import com.google.zxing.client.result.TelParsedResult;
 
-public class TelResultBean extends ResultBean {
+public class TelResultBean extends ResultBean<TelParsedResult> {
 
     private String number;
     private String telURI;
@@ -19,14 +16,17 @@ public class TelResultBean extends ResultBean {
 
     public TelResultBean(Result result, ParsedResult parsedResult) {
         super(result, parsedResult);
+        buildField((TelParsedResult) parsedResult);
     }
 
+    @Override
     public void buildField(@NonNull TelParsedResult parsedResult) {
         number = parsedResult.getNumber();
         telURI = parsedResult.getTelURI();
         title = parsedResult.getTitle();
     }
 
+    @Override
     public String formatText() {
         if (!TextUtils.isEmpty(rawText)) {
             return rawText;
@@ -47,5 +47,18 @@ public class TelResultBean extends ResultBean {
 
     public String getTitle() {
         return title;
+    }
+
+    @Override
+    public String toString() {
+        return "TelResultBean{" +
+                "number='" + number + '\'' +
+                ", telURI='" + telURI + '\'' +
+                ", title='" + title + '\'' +
+                ", barcodeFormat=" + barcodeFormat +
+                ", parsedResultType=" + parsedResultType +
+                ", createTime=" + createTime +
+                ", rawText='" + rawText + '\'' +
+                '}';
     }
 }

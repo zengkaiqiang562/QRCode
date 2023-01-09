@@ -6,16 +6,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.blankj.utilcode.util.TimeUtils;
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.google.zxing.client.result.AddressBookParsedResult;
 import com.google.zxing.client.result.CalendarParsedResult;
 import com.google.zxing.client.result.ParsedResult;
-import com.google.zxing.client.result.ParsedResultType;
 
 import java.util.Date;
 
-public class CalendarResultBean extends ResultBean {
+public class CalendarResultBean extends ResultBean<CalendarParsedResult> {
 
     private static final String TAG = "CalendarResultBean";
 
@@ -27,10 +24,14 @@ public class CalendarResultBean extends ResultBean {
     private String location;
     private String description;
 
+    public CalendarResultBean() {}
+
     public CalendarResultBean(Result result, ParsedResult parsedResult) {
         super(result, parsedResult);
+        buildField((CalendarParsedResult) parsedResult);
     }
 
+    @Override
     public void buildField(@NonNull CalendarParsedResult parsedResult) {
         summary = parsedResult.getSummary();
         start = parsedResult.getStartTimestamp();
@@ -41,6 +42,7 @@ public class CalendarResultBean extends ResultBean {
         description = parsedResult.getDescription();
     }
 
+    @Override
     public String formatText() {
         if (!TextUtils.isEmpty(rawText)) {
             return rawText;
@@ -79,6 +81,36 @@ public class CalendarResultBean extends ResultBean {
     public String getDescription() {
         return description;
     }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
+    public void setStart(long start) {
+        this.start = start;
+    }
+
+    public void setStartAllDay(boolean startAllDay) {
+        this.startAllDay = startAllDay;
+    }
+
+    public void setEnd(long end) {
+        this.end = end;
+    }
+
+    public void setEndAllDay(boolean endAllDay) {
+        this.endAllDay = endAllDay;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /*=======================================================================================*/
 
     private String getEventNameField() {
         String inputName = summary;
@@ -161,5 +193,22 @@ public class CalendarResultBean extends ResultBean {
 
     private static Date addMilliseconds(Date time1, long diffTimeZone) { // GMT，diffTimeZone is 0
         return new Date(time1.getTime() + diffTimeZone);
+    }
+
+    @Override
+    public String toString() {
+        return "CalendarResultBean{" +
+                "summary='" + summary + '\'' +
+                ", start=" + start +
+                ", startAllDay=" + startAllDay +
+                ", end=" + end +
+                ", endAllDay=" + endAllDay +
+                ", location='" + location + '\'' +
+                ", description='" + description + '\'' +
+                ", barcodeFormat=" + barcodeFormat +
+                ", parsedResultType=" + parsedResultType +
+                ", createTime=" + createTime +
+                ", rawText='" + rawText + '\'' +
+                '}';
     }
 }

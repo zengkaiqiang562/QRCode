@@ -12,7 +12,7 @@ import com.google.zxing.client.result.ParsedResultType;
 import com.google.zxing.client.result.TextParsedResult;
 import com.google.zxing.client.result.WifiParsedResult;
 
-public class WifiResultBean extends ResultBean {
+public class WifiResultBean extends ResultBean<WifiParsedResult> {
 
     private static final String TAG = "WifiResultBean";
 
@@ -25,10 +25,14 @@ public class WifiResultBean extends ResultBean {
     private String eapMethod;
     private String phase2Method;
 
+    public WifiResultBean() {}
+
     public WifiResultBean(Result result, ParsedResult parsedResult) {
         super(result, parsedResult);
+        buildField((WifiParsedResult) parsedResult);
     }
 
+    @Override
     public void buildField(@NonNull WifiParsedResult parsedResult) {
         ssid = parsedResult.getSsid();
         networkEncryption = parsedResult.getNetworkEncryption();
@@ -40,6 +44,7 @@ public class WifiResultBean extends ResultBean {
         phase2Method = parsedResult.getPhase2Method();
     }
 
+    @Override
     public String formatText() {
         if (!TextUtils.isEmpty(rawText)) {
             return rawText;
@@ -83,6 +88,39 @@ public class WifiResultBean extends ResultBean {
         return phase2Method;
     }
 
+    public void setSsid(String ssid) {
+        this.ssid = ssid;
+    }
+
+    public void setNetworkEncryption(String networkEncryption) {
+        this.networkEncryption = networkEncryption;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setHidden(boolean hidden) {
+        this.hidden = hidden;
+    }
+
+    public void setIdentity(String identity) {
+        this.identity = identity;
+    }
+
+    public void setAnonymousIdentity(String anonymousIdentity) {
+        this.anonymousIdentity = anonymousIdentity;
+    }
+
+    public void setEapMethod(String eapMethod) {
+        this.eapMethod = eapMethod;
+    }
+
+    public void setPhase2Method(String phase2Method) {
+        this.phase2Method = phase2Method;
+    }
+
+    /*=======================================================================================*/
 
     private static String getWifiString(String ssid, String password, String type, boolean hidden) {
         StringBuilder output = new StringBuilder(100);
@@ -135,5 +173,23 @@ public class WifiResultBean extends ResultBean {
             return '\"' + value + '\"';
         }
         return value;
+    }
+
+    @Override
+    public String toString() {
+        return "WifiResultBean{" +
+                "ssid='" + ssid + '\'' +
+                ", networkEncryption='" + networkEncryption + '\'' +
+                ", password='" + password + '\'' +
+                ", hidden=" + hidden +
+                ", identity='" + identity + '\'' +
+                ", anonymousIdentity='" + anonymousIdentity + '\'' +
+                ", eapMethod='" + eapMethod + '\'' +
+                ", phase2Method='" + phase2Method + '\'' +
+                ", barcodeFormat=" + barcodeFormat +
+                ", parsedResultType=" + parsedResultType +
+                ", createTime=" + createTime +
+                ", rawText='" + rawText + '\'' +
+                '}';
     }
 }

@@ -4,16 +4,13 @@ import android.text.TextUtils;
 
 import androidx.annotation.NonNull;
 
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.google.zxing.client.result.ExpandedProductParsedResult;
 import com.google.zxing.client.result.ParsedResult;
-import com.google.zxing.client.result.ParsedResultType;
-import com.google.zxing.client.result.ProductParsedResult;
 
 import java.util.Map;
 
-public class ProductExpandResultBean extends ResultBean {
+public class ProductExpandResultBean extends ResultBean<ExpandedProductParsedResult> {
 
     private String productID;
     private String sscc;
@@ -33,8 +30,10 @@ public class ProductExpandResultBean extends ResultBean {
 
     public ProductExpandResultBean(Result result, ParsedResult parsedResult) {
         super(result, parsedResult);
+        buildField((ExpandedProductParsedResult) parsedResult);
     }
 
+    @Override
     public void buildField(@NonNull ExpandedProductParsedResult parsedResult) {
         productID = parsedResult.getProductID();
         sscc = parsedResult.getSscc();
@@ -52,6 +51,7 @@ public class ProductExpandResultBean extends ResultBean {
         uncommonAIs = parsedResult.getUncommonAIs();
     }
 
+    @Override
     public String formatText() {
         if (!TextUtils.isEmpty(rawText)) {
             return rawText;
@@ -113,5 +113,29 @@ public class ProductExpandResultBean extends ResultBean {
 
     public Map<String, String> getUncommonAIs() {
         return uncommonAIs;
+    }
+
+    @Override
+    public String toString() {
+        return "ProductExpandResultBean{" +
+                "productID='" + productID + '\'' +
+                ", sscc='" + sscc + '\'' +
+                ", lotNumber='" + lotNumber + '\'' +
+                ", productionDate='" + productionDate + '\'' +
+                ", packagingDate='" + packagingDate + '\'' +
+                ", bestBeforeDate='" + bestBeforeDate + '\'' +
+                ", expirationDate='" + expirationDate + '\'' +
+                ", weight='" + weight + '\'' +
+                ", weightType='" + weightType + '\'' +
+                ", weightIncrement='" + weightIncrement + '\'' +
+                ", price='" + price + '\'' +
+                ", priceIncrement='" + priceIncrement + '\'' +
+                ", priceCurrency='" + priceCurrency + '\'' +
+                ", uncommonAIs=" + uncommonAIs +
+                ", barcodeFormat=" + barcodeFormat +
+                ", parsedResultType=" + parsedResultType +
+                ", createTime=" + createTime +
+                ", rawText='" + rawText + '\'' +
+                '}';
     }
 }

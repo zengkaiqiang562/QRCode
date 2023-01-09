@@ -5,22 +5,16 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.blankj.utilcode.util.CollectionUtils;
-import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.google.zxing.client.result.CalendarParsedResult;
 import com.google.zxing.client.result.EmailAddressParsedResult;
 import com.google.zxing.client.result.ParsedResult;
-import com.google.zxing.client.result.ParsedResultType;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.regex.Pattern;
 
-public class EmailAddressResultBean extends ResultBean {
+public class EmailAddressResultBean extends ResultBean<EmailAddressParsedResult> {
 
     private static final String TAG = "EmailAddressResultBean";
 
@@ -32,10 +26,14 @@ public class EmailAddressResultBean extends ResultBean {
     private String subject; // 标题
     private String body; // 内容
 
+    public EmailAddressResultBean() {}
+
     public EmailAddressResultBean(Result result, ParsedResult parsedResult) {
         super(result, parsedResult);
+        buildField((EmailAddressParsedResult) parsedResult);
     }
 
+    @Override
     public void buildField(@NonNull EmailAddressParsedResult parsedResult) {
         tos = parsedResult.getTos();
         ccs = parsedResult.getCCs();
@@ -43,6 +41,7 @@ public class EmailAddressResultBean extends ResultBean {
         body = parsedResult.getBody();
     }
 
+    @Override
     public String formatText() {
         if (!TextUtils.isEmpty(rawText)) {
             return rawText;
@@ -96,6 +95,24 @@ public class EmailAddressResultBean extends ResultBean {
         return body;
     }
 
+    public void setTos(String... tos) {
+        this.tos = tos;
+    }
+
+    public void setCcs(String... ccs) {
+        this.ccs = ccs;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
+    }
+
+    /*=======================================================================================*/
+
     private static String urlEncode(String raw) {
         try {
             return URLEncoder.encode(raw, "UTF-8");
@@ -103,5 +120,19 @@ public class EmailAddressResultBean extends ResultBean {
             Log.e(TAG, "--> urlEncode() UnsupportedEncodingException=" + uee);
             return raw;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "EmailAddressResultBean{" +
+                "tos=" + Arrays.toString(tos) +
+                ", ccs=" + Arrays.toString(ccs) +
+                ", subject='" + subject + '\'' +
+                ", body='" + body + '\'' +
+                ", barcodeFormat=" + barcodeFormat +
+                ", parsedResultType=" + parsedResultType +
+                ", createTime=" + createTime +
+                ", rawText='" + rawText + '\'' +
+                '}';
     }
 }
