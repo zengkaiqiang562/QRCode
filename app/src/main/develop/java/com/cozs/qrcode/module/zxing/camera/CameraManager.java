@@ -334,6 +334,9 @@ public final class CameraManager {
      * it automatically based on available cameras and their orientation.
      *
      * @param cameraId camera ID of the camera to use. A negative value means "no preference".
+     *
+     * @see com.cozs.qrcode.module.zxing.camera.open.CameraFacing#BACK 后置
+     * @see com.cozs.qrcode.module.zxing.camera.open.CameraFacing#FRONT 前置
      */
     public synchronized void setManualCameraId(int cameraId) {
         requestedCameraId = cameraId;

@@ -54,7 +54,7 @@ public final class OpenCameraInterface {
         }
         if (cameraId >= numCameras) {
             Logger.e(TAG, "Requested camera does not exist: " + cameraId);
-            return null;
+            cameraId = NO_REQUESTED_CAMERA; // 指定摄像头不存在时，用默认的（后置的或其他存在的）
         }
 
         if (cameraId <= NO_REQUESTED_CAMERA) {

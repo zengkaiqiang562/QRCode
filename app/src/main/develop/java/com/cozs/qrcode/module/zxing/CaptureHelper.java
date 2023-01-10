@@ -36,6 +36,7 @@ import com.cozs.qrcode.R;
 import com.cozs.qrcode.module.library.Logger;
 import com.cozs.qrcode.module.zxing.camera.CameraManager;
 import com.cozs.qrcode.module.zxing.camera.FrontLightMode;
+import com.cozs.qrcode.module.zxing.camera.open.CameraFacing;
 import com.cozs.qrcode.module.zxing.clipboard.ClipboardInterface;
 import com.cozs.qrcode.module.zxing.history.HistoryManager;
 import com.cozs.qrcode.module.zxing.result.ResultHandler;
@@ -166,6 +167,11 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
      */
     private boolean copyToClipboard;
 
+    /**
+     * 摄像头id（默认后置）
+     */
+    private int cameraId = CameraFacing.BACK.ordinal();
+
     public CaptureHelper(Fragment fragment, SurfaceView surfaceView, ViewfinderView viewfinderView, View ivTorch) {
         this(fragment.getActivity(), surfaceView, viewfinderView, ivTorch);
     }
@@ -219,8 +225,8 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
     public void onResume() {
 
         // historyManager must be initialized here to update the history preference
-        historyManager = new HistoryManager(activity);
-        historyManager.trimHistory();
+//        historyManager = new HistoryManager(activity);
+//        historyManager.trimHistory();
 
         beepManager.updatePrefs();
 
@@ -296,6 +302,17 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
         return false;
     }
 
+    public void switchCamera() {
+        cameraId = cameraId == CameraFacing.BACK.ordinal()
+                ? CameraFacing.FRONT.ordinal()
+                : CameraFacing.BACK.ordinal();
+        cameraManager.setManualCameraId(cameraId);
+
+        // TODO 是否需要在 pause 和 resume 之间加延迟
+        onPause();
+        onResume();
+    }
+
     private void initCameraManager() {
         cameraManager = new CameraManager(activity);
         cameraManager.setFullScreenScan(isFullScreenScan);
@@ -320,7 +337,6 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
                 }
             });
             cameraManager.setOnTorchListener(torch -> ivTorch.setSelected(torch));
-
         }
     }
 
@@ -359,6 +375,7 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
 
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
+        Logger.e(TAG, "--> surfaceCreated()  hasSurface=" + hasSurface);
         if (holder == null) {
             Logger.e(TAG, "*** WARNING *** surfaceCreated() gave us a null surface!");
         }
@@ -375,6 +392,7 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
+        Logger.e(TAG, "--> surfaceDestroyed()  hasSurface=" + hasSurface);
         hasSurface = false;
     }
 
