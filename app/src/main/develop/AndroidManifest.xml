@@ -28,7 +28,7 @@
 
         <!--<activity android:name="com.cozs.qrcode.module.activity.GuideActivity"
             android:exported="true"
-            android:screenOrientation="portrait"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
             android:launchMode="singleTask"
             android:theme="@style/SplashActivityStyle">
             <intent-filter>

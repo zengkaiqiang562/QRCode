@@ -1,5 +1,6 @@
 package com.cozs.qrcode.module.activity;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 
@@ -31,6 +32,7 @@ public class GuideActivity extends BaseActivity {
 
     @Override
     protected void setContentView() {
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         guideBinding = DataBindingUtil.setContentView(this, R.layout.activity_guide);
     }
 
