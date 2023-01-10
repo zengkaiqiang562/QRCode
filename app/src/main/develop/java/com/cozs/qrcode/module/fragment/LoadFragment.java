@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 
+import com.blankj.utilcode.util.FragmentUtils;
+import com.blankj.utilcode.util.SPUtils;
 import com.cozs.qrcode.R;
 import com.cozs.qrcode.databinding.FragmentLoadBindingImpl;
 import com.cozs.qrcode.module.activity.MainActivity;
@@ -103,25 +105,40 @@ public class LoadFragment extends BaseFragment implements IEventListener<AdvertE
     }
 
     private void continueEnjoyApp(long delay, boolean startAdShowed) { // delay: ms
-//        if (!ActivityStackManager.getInstance().hasActivity(AboutUsActivity.class)
-//                && !ActivityStackManager.getInstance().hasActivity(PhotoActivity.class)
-//                && !ActivityStackManager.getInstance().hasActivity(PhotoDetailActivity.class)
-//                && !ActivityStackManager.getInstance().hasActivity(ReportActivity.class)
-//                && !ActivityStackManager.getInstance().hasActivity(VideoActivity.class)
-//                && !ActivityStackManager.getInstance().hasActivity(VideoDetailActivity.class)) { // 冷启动 or 热启动时任务栈中无首页 or 首页在栈顶则跳首页
-        if (true) { // TODO
-            Logger.e(TAG, "--> continueEnjoyApp() start SCHomeActivity");
-            handler.postDelayed(() -> {
-                Intent intent = new Intent(activity, MainActivity.class);
-                activity.startActivity(intent);
-            }, delay);
-        }
+        Logger.e(TAG, "--> continueEnjoyApp() start SCHomeActivity");
 
         handler.postDelayed(() -> { // post 中结束页面，避免当任务栈为空时，切换页面会显示桌面
+
+            boolean agreed = SPUtils.getInstance().getBoolean(Constants.SPREF_AGREE_PRIVACY_POLICY, false);
+            boolean enableGuide = ConfigLibrary.getInstance().isEnableGuide();
+            Logger.e(TAG, "--> agreed=" + agreed + "  enableGuide=" + enableGuide);
+            boolean showGuide = !agreed && enableGuide;
+
+            if (showGuide) {
+                GuideFragment guideFragment = new GuideFragment();
+                FragmentUtils.replace(activity.getSupportFragmentManager(),
+                        guideFragment, R.id.container_guide, guideFragment.getFMTag());
+                return;
+            }
+
+            if (shouldJumpMain()) {
+                Intent intent = new Intent(activity, MainActivity.class);
+                activity.startActivity(intent);
+            }
             activity.finish();
         }, delay);
 
         ConfigLibrary.getInstance().updateApp();
+    }
+
+    private boolean shouldJumpMain() { // 冷启动 or 热启动时任务栈中无首页 or 首页在栈顶则跳首页
+//        return !ActivityStackManager.getInstance().hasActivity(AboutUsActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(PhotoActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(PhotoDetailActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(ReportActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(VideoActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(VideoDetailActivity.class);
+        return true; // TODO test
     }
 
     @Override

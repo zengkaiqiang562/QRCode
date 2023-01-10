@@ -7,7 +7,7 @@
 
     <SeekBar
         android:id="@+id/seekbar"
-        android:layout_width="295dp"
+        android:layout_width="320dp"
         android:layout_height="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

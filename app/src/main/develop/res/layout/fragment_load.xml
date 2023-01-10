@@ -15,25 +15,25 @@
 
         <ImageView
             android:id="@+id/iv_logo"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
             android:src="@drawable/logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.38"/>
+            app:layout_constraintVertical_bias="0.273"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/smart_clean_master"
-            android:textColor="#FF1A1A1A"
-            android:textSize="20sp"
+            android:text="@string/app_name"
+            android:textColor="@color/black"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="20dp"
             android:textStyle="bold"/>
 
         <TextView
@@ -43,13 +43,12 @@
             app:layout_constraintEnd_toStartOf="@id/fast_progressbar"
             app:layout_constraintBottom_toTopOf="@id/fast_progressbar"
             android:layout_marginEnd="-15dp"
-            android:layout_marginBottom="6dp"
-            android:background="@drawable/bg_load_text"
+            android:layout_marginBottom="7dp"
             android:gravity="center_horizontal"
-            android:paddingTop="2dp"
+            android:fontFamily="@font/aileron_regular"
             tools:text="100%"
-            android:textColor="@color/white"
-            android:textSize="12sp"/>
+            android:textColor="#FFF47611"
+            android:textSize="14sp"/>
 
         <com.cozs.qrcode.module.view.FastProgressbar
             android:id="@+id/fast_progressbar"
@@ -59,7 +58,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/iv_logo"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_bias="0.753"/>
+            app:layout_constraintVertical_bias="0.94"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

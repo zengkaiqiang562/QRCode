@@ -133,6 +133,8 @@ dependencies {
     // 权限请求框架：https://github.com/getActivity/XXPermissions
     implementation("com.github.getActivity:XXPermissions:16.0")
 
+    implementation("com.romandanylyk:pageindicatorview:1.0.3")
+
     /* Firebase */
     // Import the BoM for the Firebase platform
     implementation(platform("com.google.firebase:firebase-bom:30.5.0"))

@@ -12,179 +12,74 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <FrameLayout
+        
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_privacy"
-            android:layout_marginBottom="62dp">
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/root_guide_2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:visibility="gone">
-
-                <ImageView
-                    android:id="@+id/iv_guide_2"
-                    android:layout_width="315dp"
-                    android:layout_height="324dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_guide_2_next"
-                    app:layout_constraintVertical_bias="0.354"
-                    android:src="@drawable/img_guide_2"/>
-
-                <TextView
-                    android:id="@+id/tv_smart_photo_clean"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_guide_2"
-                    app:layout_constraintBottom_toTopOf="@id/tv_clean_simil_large"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    app:layout_constraintVertical_bias="0.545"
-                    android:text="@string/smart_photo_clean"
-                    android:textSize="20sp"
-                    android:textColor="#FF1A1A1A"/>
-
-                <TextView
-                    android:id="@+id/tv_clean_simil_large"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_smart_photo_clean"
-                    app:layout_constraintBottom_toTopOf="@id/tv_guide_2_next"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/clean_simil_large"
-                    android:textSize="16sp"
-                    android:textColor="#FF666666"/>
-
-                <TextView
-                    android:id="@+id/tv_guide_2_next"
-                    android:layout_width="315dp"
-                    android:layout_height="46dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@drawable/bg_button_4dp"
-                    android:gravity="center"
-                    android:text="@string/next_step"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:onClick="@{OnClickListener::onClick}"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/root_guide_1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/iv_guide_1"
-                    android:layout_width="315dp"
-                    android:layout_height="324dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@id/tv_guide_1_next"
-                    app:layout_constraintVertical_bias="0.354"
-                    android:src="@drawable/img_guide_1"/>
-
-                <TextView
-                    android:id="@+id/tv_unuse_photo"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/iv_guide_1"
-                    app:layout_constraintBottom_toTopOf="@id/tv_clean_blur_dupli"
-                    app:layout_constraintVertical_chainStyle="packed"
-                    app:layout_constraintVertical_bias="0.545"
-                    android:text="@string/clean_unuse_photo"
-                    android:textSize="20sp"
-                    android:textColor="#FF1A1A1A"/>
-
-                <TextView
-                    android:id="@+id/tv_clean_blur_dupli"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_unuse_photo"
-                    app:layout_constraintBottom_toTopOf="@id/tv_guide_1_next"
-                    android:layout_marginTop="4dp"
-                    android:text="@string/onekey_clean_blur_dupli"
-                    android:textSize="16sp"
-                    android:textColor="#FF666666"/>
-
-                <TextView
-                    android:id="@+id/tv_guide_1_next"
-                    android:layout_width="315dp"
-                    android:layout_height="46dp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:background="@drawable/bg_button_4dp"
-                    android:gravity="center"
-                    android:text="@string/next_step"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:onClick="@{OnClickListener::onClick}"/>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </FrameLayout>
-        
-        <TextView
-            android:id="@+id/tv_privacy"
+        <com.rd.PageIndicatorView
+            android:id="@+id/indicator"
             android:layout_width="wrap_content"
-            android:layout_height="34dp"
+            android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/tv_point"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            android:layout_marginBottom="14dp"
-            android:gravity="center_vertical"
-            android:text="@string/privacy_policy"
-            android:textSize="10sp"
-            android:textColor="#FF3C96FF"
+            app:layout_constraintVertical_bias="0.523"
+            app:piv_viewPager="@id/viewpager"
+            app:piv_padding="6dp"
+            app:piv_radius="3dp"
+            app:piv_unselectedColor="#FFCCCCCC"
+            app:piv_selectedColor="#FFF47611"/>
+
+        <TextView
+            android:id="@+id/tv_button"
+            android:layout_width="165dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/indicator"
+            app:layout_constraintBottom_toTopOf="@id/tv_privacy"
+            app:layout_constraintVertical_bias="0.47"
+            android:background="@drawable/bg_guide_btn"
+            android:gravity="center"
+            android:fontFamily="@font/aileron_bold"
+            tools:text="@string/next_step"
+            android:textColor="@color/white"
+            android:textSize="16sp"
             android:onClick="@{OnClickListener::onClick}"/>
 
         <TextView
-            android:id="@+id/tv_point"
+            android:id="@+id/tv_privacy"
             android:layout_width="wrap_content"
-            android:layout_height="34dp"
-            app:layout_constraintStart_toEndOf="@id/tv_privacy"
-            app:layout_constraintEnd_toStartOf="@id/tv_service"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="14dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:gravity="center_vertical"
-            android:text="·"
-            android:textSize="10sp"
-            android:textColor="#FF3C96FF"/>
+            android:layout_marginStart="25dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/aileron_regular"
+            android:text="@string/privacy_policy"
+            android:textSize="14sp"
+            android:textColor="#FF999999"
+            android:onClick="@{OnClickListener::onClick}"/>
 
         <TextView
             android:id="@+id/tv_service"
             android:layout_width="wrap_content"
-            android:layout_height="34dp"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/tv_point"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="14dp"
-            android:gravity="center_vertical"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="40dp"
+            android:fontFamily="@font/aileron_regular"
             android:text="@string/terms_of_service"
-            android:textSize="10sp"
-            android:textColor="#FF3C96FF"
+            android:textSize="14sp"
+            android:textColor="#FF999999"
             android:onClick="@{OnClickListener::onClick}"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
