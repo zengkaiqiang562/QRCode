@@ -38,7 +38,8 @@ import com.cozs.qrcode.module.zxing.camera.CameraManager;
 import com.cozs.qrcode.module.zxing.camera.FrontLightMode;
 import com.cozs.qrcode.module.zxing.camera.open.CameraFacing;
 import com.cozs.qrcode.module.zxing.clipboard.ClipboardInterface;
-import com.cozs.qrcode.module.zxing.history.HistoryManager;
+import com.cozs.qrcode.module.zxing.ext.history.HistoryEntity;
+import com.cozs.qrcode.module.zxing.ext.history.HistoryManager;
 import com.cozs.qrcode.module.zxing.result.ResultHandler;
 import com.cozs.qrcode.module.zxing.result.ResultHandlerFactory;
 import com.google.zxing.BarcodeFormat;
@@ -159,8 +160,6 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
     private OnCaptureCallback onCaptureCallback;
 
     private boolean hasCameraFlash;
-
-    private HistoryManager historyManager;
 
     /**
      * 是否保存到剪切板
@@ -540,7 +539,8 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
         Logger.e(TAG, "--> onResult  resultHandler.getType()=" + resultHandler.getType());
         Logger.e(TAG, "--> onResult  resultHandler.getDisplayContents()=" + resultHandler.getDisplayContents());
 
-        historyManager.addHistoryItem(result, resultHandler);
+        HistoryManager.getInstance().addHistory(new HistoryEntity(result, resultHandler.getResult()));
+
         maybeSetClipboard(resultHandler); // 扫描结果保存到剪切板
 
         if (isContinuousScan) { // 连续扫描
