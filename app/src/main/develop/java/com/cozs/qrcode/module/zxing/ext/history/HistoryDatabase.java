@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase;
 
 import com.cozs.qrcode.module.QRApplication;
 
-@Database(entities = {HistoryEntity.class}, version = 1)
+@Database(entities = {HistoryEntity.class}, version = 1, exportSchema = false)
 public abstract class HistoryDatabase extends RoomDatabase {
 
     private static final String DATABASE_NAME = "history_db";
