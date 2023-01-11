@@ -2,6 +2,7 @@ package com.cozs.qrcode.module.fragment;
 
 import static com.rd.draw.data.Orientation.*;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
 import android.text.Spannable;
@@ -22,6 +23,7 @@ import com.blankj.utilcode.util.FragmentUtils;
 import com.blankj.utilcode.util.SPUtils;
 import com.cozs.qrcode.R;
 import com.cozs.qrcode.databinding.FragmentGuideBinding;
+import com.cozs.qrcode.module.activity.MainActivity;
 import com.cozs.qrcode.module.constant.Constants;
 import com.cozs.qrcode.module.library.ActivityUtils;
 import com.cozs.qrcode.module.library.EventTracker;
@@ -85,8 +87,21 @@ public class GuideFragment extends BaseFragment implements View.OnClickListener 
 
     private void startApp() {
         SPUtils.getInstance().put(Constants.SPREF_AGREE_PRIVACY_POLICY, true);
-        LoadFragment loadFragment = new LoadFragment();
-        FragmentUtils.replace(activity.getSupportFragmentManager(), loadFragment, R.id.container_guide, loadFragment.getFMTag());
+        if (shouldJumpMain()) {
+            Intent intent = new Intent(activity, MainActivity.class);
+            activity.startActivity(intent);
+        }
+        activity.finish();
+    }
+
+    private boolean shouldJumpMain() { // 冷启动 or 热启动时任务栈中无首页 or 首页在栈顶则跳首页
+//        return !ActivityStackManager.getInstance().hasActivity(AboutUsActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(PhotoActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(PhotoDetailActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(ReportActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(VideoActivity.class)
+//                && !ActivityStackManager.getInstance().hasActivity(VideoDetailActivity.class);
+        return true; // TODO test
     }
 
     private void initViewPager() {

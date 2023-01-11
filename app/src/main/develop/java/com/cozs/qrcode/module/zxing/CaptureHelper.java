@@ -539,7 +539,8 @@ public class CaptureHelper implements CaptureLifecycle, CaptureTouchEvent, Captu
         Logger.e(TAG, "--> onResult  resultHandler.getType()=" + resultHandler.getType());
         Logger.e(TAG, "--> onResult  resultHandler.getDisplayContents()=" + resultHandler.getDisplayContents());
 
-        HistoryManager.getInstance().addHistory(new HistoryEntity(result, resultHandler.getResult()));
+        HistoryEntity history = new HistoryEntity(result, resultHandler.getResult());
+        HistoryManager.getInstance().addHistory(history);
 
         maybeSetClipboard(resultHandler); // 扫描结果保存到剪切板
 
