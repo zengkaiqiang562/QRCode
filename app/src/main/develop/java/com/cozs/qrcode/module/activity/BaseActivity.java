@@ -56,7 +56,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         TAG = getLogTag();
         Logger.e(TAG, "--> onCreate()");
-        ImmersionBar.with(this)/*.transparentNavigationBar()*/.transparentStatusBar().statusBarDarkFont(true).init();
+        ImmersionBar.with(this)/*.transparentNavigationBar()*/.transparentStatusBar().statusBarDarkFont(false).init();
         setContentView();
         holdStatusbar(getTopStub());
         ActivityStackManager.getInstance().addActivity(this);
